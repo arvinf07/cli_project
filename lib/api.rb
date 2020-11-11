@@ -4,7 +4,7 @@ require_relative "./weather.rb"
 
 class Api
   
-  attr_accessor :query, :city_id, :weather
+  attr_accessor :query, :city_id, :weather, :city_title
 
   def initialize(query)
     @query = query
@@ -17,6 +17,7 @@ class Api
     uri = URI(url)
     response = Net::HTTP.get(uri)
     city = JSON.parse(response)
+    @city_title = city[0]["title"]
     @city_id = city[0]["woeid"]
   end  
 
@@ -37,7 +38,6 @@ class Api
       wind: day['wind_speed'],
       date: day["applicable_date"]
       }
-      binding.pry
       Weather.new(weather_attr)
     end  
   end  
@@ -45,5 +45,6 @@ class Api
 end  
 
 api = Api.new('new york')
+api.create_weather
 binding.pry
 'let us pry'
