@@ -1,5 +1,6 @@
 require 'pry'
 require_relative "../environment.rb"
+require_relative "./weather.rb"
 
 class Api
   
@@ -28,7 +29,17 @@ class Api
   end  
 
   def create_weather
-    Weather.new()
+    weather.each do |day|
+      weather_attr = {state: day["weather_state_name"],
+      current_temp: day["the_temp"],
+      min_temp: day["min_temp"],
+      max_temp: day['max_temp'],
+      wind: day['wind_speed'],
+      date: day["applicable_date"]
+      }
+      binding.pry
+      Weather.new(weather_attr)
+    end  
   end  
 
 end  

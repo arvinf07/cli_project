@@ -1,12 +1,34 @@
 require 'pry'
 require_relative "../environment.rb"
+require_relative "./api.rb"
 
 class Weather
-  def initialize(state:, max_temp:, min_temp:, current_temp:, wind:, date:)
 
+  @@all = []
+
+
+  # def initialize(state:, max_temp:, min_temp:, current_temp:, wind:, date:)
+  def initialize(attributes)
+    attributes.each do |key, value| 
+      self.class.attr_accessor(key)
+      self.send(("#{key}="), value)
+    end
+    save 
+  end
+
+  def self.all
+    @@all
   end  
 
-  def five_day_forecast
+  def save 
+    @@all << self
+  end
 
-  end  
+  # def celsius_to_fareheight
+
+  # end  
+
+  # def five_day_forecast
+
+  # end  
 end  
