@@ -1,9 +1,14 @@
+require 'pry'
+require_relative "../environment.rb"
+require_relative "./api.rb"
 
 
 class Cli
   def start
     puts "Welcome"
   end
+
+
 
    # def forecast_display
   #   if @state == "Clear" && @current_temp > 50 && @@all.first == self

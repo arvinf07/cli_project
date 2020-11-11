@@ -38,7 +38,7 @@ class Api
     current_temp: day["the_temp"],
     min_temp: day["min_temp"],
     max_temp: day['max_temp'],
-    wind: day['wind_speed'],
+    wind: day['wind_speed'].to_i,
     date: day["applicable_date"]
     }
     Weather.new(weather_attr)
@@ -47,12 +47,10 @@ class Api
 end  
 
 api = Api.new('new york')
-Api.new('new york')
-Api.new('new york')
-Api.new('new york')
-Api.new('new york')
-Api.new('new york')
-Api.new('new york')
-Api.new('new york')
+Api.new('london')
+Api.new('tokyo')
+Api.new('paris')
+Api.new('dubai')
+Api.new('singapore')
 binding.pry
 'let us pry'
