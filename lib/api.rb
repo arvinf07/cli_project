@@ -3,11 +3,12 @@ require_relative "../environment.rb"
 
 class Api
   
-  attr_accessor :query, :city_id
+  attr_accessor :query, :city_id, :weather
 
   def initialize(query)
     @query = query
     get_city_id
+    fetch_weather
   end  
 
   def get_city_id
@@ -23,7 +24,7 @@ class Api
     uri = URI(url)
     response = Net::HTTP.get(uri)
     JSON.parse(response)
-    weather = JSON.parse(response)
+    @weather = JSON.parse(response)["consolidated_weather"]
   end  
 
   def create_weather
