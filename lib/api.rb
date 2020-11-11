@@ -4,12 +4,14 @@ require_relative "./weather.rb"
 
 class Api
   
-  attr_accessor :query, :city_id, :weather, :city_title
+  attr_accessor :query, :city_id, :weather
+
 
   def initialize(query)
     @query = query
     get_city_id
     fetch_weather
+    create_weather
   end  
 
   def get_city_id
@@ -30,21 +32,27 @@ class Api
   end  
 
   def create_weather
-    weather.each do |day|
-      weather_attr = {state: day["weather_state_name"],
-      current_temp: day["the_temp"],
-      min_temp: day["min_temp"],
-      max_temp: day['max_temp'],
-      wind: day['wind_speed'],
-      date: day["applicable_date"]
-      }
-      Weather.new(weather_attr)
-    end  
+    day = weather.first
+    weather_attr = {state: day["weather_state_name"],
+    city: @city_title,
+    current_temp: day["the_temp"],
+    min_temp: day["min_temp"],
+    max_temp: day['max_temp'],
+    wind: day['wind_speed'],
+    date: day["applicable_date"]
+    }
+    Weather.new(weather_attr)
   end  
 
 end  
 
 api = Api.new('new york')
-api.create_weather
+Api.new('new york')
+Api.new('new york')
+Api.new('new york')
+Api.new('new york')
+Api.new('new york')
+Api.new('new york')
+Api.new('new york')
 binding.pry
 'let us pry'
