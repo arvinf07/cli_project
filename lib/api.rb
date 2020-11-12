@@ -52,5 +52,3 @@ Api.new('tokyo')
 Api.new('paris')
 Api.new('dubai')
 Api.new('singapore')
-binding.pry
-'let us pry'
