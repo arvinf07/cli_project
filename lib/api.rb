@@ -19,8 +19,12 @@ class Api
     uri = URI(url)
     response = Net::HTTP.get(uri)
     city = JSON.parse(response)
-    @city_title = city[0]["title"]
-    @city_id = city[0]["woeid"]
+    if !city.any?
+      Cli.invalid_city
+    else  
+      @city_title = city[0]["title"]
+      @city_id = city[0]["woeid"]
+    end  
   end  
 
   def fetch_weather

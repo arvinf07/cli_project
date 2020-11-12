@@ -2,4 +2,4 @@
 
 require_relative "../environment.rb"
 
-Cli.new.start
+Cli.start
