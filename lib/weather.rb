@@ -14,6 +14,10 @@ class Weather
     save 
   end
 
+  def self.weather_exists?(city)
+    @@all.any? {|weather| weather.city.downcase == city }
+  end  
+
   def self.all
     @@all
   end  
@@ -27,5 +31,5 @@ class Weather
     @min_temp = (@min_temp * 1.8 + (32)).to_i
     @max_temp = (@max_temp * 1.8 + (32)).to_i
   end  
-  
+
 end  

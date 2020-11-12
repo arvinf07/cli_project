@@ -18,22 +18,21 @@ class Cli
     puts "Enter the number for the city's weather you wish to see"
     puts "If the city you are looking for is not on the list\ntype 'new' to search for a new city."
     puts "When you are done type 'exit' to quit the program"
-    user_input = gets.chomp
-    if user_input.downcase == 'new'
+    user_input = gets.strip
+    if user_input.downcase == 'new' 
       add_city
     elsif user_input.downcase == 'exit'
       puts "Bye! Enjoy the weather, or not"  
       exit 
     elsif user_input == 'list'
-      sleep(2)
       display_options  
+      sleep(3)
     elsif user_input.to_i.between?(1, Weather.all.size)
-      sleep(2)
-      weather = Weather.all[user_input.to_i-1]
-      forecast_display(weather)
+      forecast_display(Weather.all[user_input.to_i-1])
+      sleep(3)
     else 
-      puts "That is not a valid command. Try again bucko"  
-      sleep(2)
+      puts "That is not a valid command. Try again bucko\n\n"  
+      sleep(3)
       display_options
     end  
   end  
@@ -62,27 +61,29 @@ class Cli
         puts "Watch your head! Its hailing in #{weather.city}"
       end  
     end  
+    sleep(3)
     display_options
   end  
 
   def self.add_city
-    puts "What city would you like to add?(only cities are valid"
-    new_city = gets.chomp
-    if Weather.all.any? {|weather| weather.city.include?(new_city)}
-      puts "\nThat city is already on the list. Look..."
+    puts "What city would you like to add?(only CITIES are valid)"
+    new_city = gets.strip.downcase
+    if Weather.weather_exists?(new_city)
+      puts "\nThat city is already on the list. Look...\n\n"
+      sleep(3)
       display_options
     else
       Api.new(new_city)  
       forecast_display(Weather.all.last)
-      sleep(2)
+      sleep(3)
       display_options
     end
   end  
 
   def self.invalid_city
-    puts "Sorry the city you entered can not be found"
+    puts "Sorry the city you entered cannot be found"
     puts "Check your spelling and try adding it again\n\n"
-    sleep(2)
+    sleep(3)
     display_options
   end  
 
