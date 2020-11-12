@@ -19,11 +19,11 @@ class Api
     uri = URI(url)
     response = Net::HTTP.get(uri)
     city = JSON.parse(response)
-    if !city.any?
-      Cli.invalid_city
-    else  
-      @city_title = city[0]["title"]
-      @city_id = city[0]["woeid"]
+    if !city.any? || city[0]["title"].downcase != self.query.downcase
+      Cli.invalid_city 
+    else
+      @city_title = city[0]["title"] #any other way to me to pass these       |  RETURN THEM AS ARRAY, AND PASS THE FUNCTION AS AN
+      @city_id = city[0]["woeid"]     #2 variables without an instnace vars?  |   ARGUMENT TO #create_weather  ??  
     end  
   end  
 

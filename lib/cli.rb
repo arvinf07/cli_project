@@ -18,6 +18,7 @@ class Cli
     puts "Enter the number for the city's weather you wish to see"
     puts "If the city you are looking for is not on the list\ntype 'new' to search for a new city."
     puts "When you are done type 'exit' to quit the program"
+    puts "------------------------------------------------------------------------------\n\n"
     user_input = gets.strip
     if user_input.downcase == 'new' 
       add_city
@@ -25,13 +26,13 @@ class Cli
       puts "Bye! Enjoy the weather, or not"  
       exit 
     elsif user_input == 'list'
-      display_options  
       sleep(3)
+      display_options  
     elsif user_input.to_i.between?(1, Weather.all.size)
       forecast_display(Weather.all[user_input.to_i-1])
-      sleep(3)
+      sleep(5)
     else 
-      puts "That is not a valid command. Try again bucko\n\n"  
+      puts "\n\nThat is not a valid command. Try again bucko\n\n"  
       sleep(3)
       display_options
     end  
@@ -39,26 +40,33 @@ class Cli
 
   def self.forecast_display(weather)
     if weather.state == "Clear" || weather.state.include?('Cloud')
-      puts "Current weather in #{weather.city} is looking good!\n\n"
+      puts "------------------------------------------------------------------------------"
+      puts "\nCurrent weather in #{weather.city} is looking good!\n\n"
       puts "The current temperature is #{weather.current_temp}°F, with the a max of #{weather.max_temp}°F and a low of #{weather.min_temp}°F"
       puts "Wind speed of #{weather.wind.to_i}mph " 
       if weather.state == 'Clear' 
         puts "Clear sky with no chance of rain!" 
       else  
-        puts "A little cloudy with a slight chance of rain"
+        puts "A little cloudy with a slight chance of rain\n\n"
+        puts "------------------------------------------------------------------------------"
       end
     else 
-      puts "Current weather in #{weather.city} is not looking so good\n\n"
+      puts "------------------------------------------------------------------------------"
+      puts "\nCurrent weather in #{weather.city} is not looking so good\n\n"
       puts "The current temperature is #{weather.current_temp}°F, with the a max of #{weather.max_temp}°F and a low of #{weather.min_temp}°F"
       puts "Wind speed of #{weather.wind.to_i}mph " 
       if weather.state == "Showers" || weather.state.include?("Rain")
         puts "Dont forget your umbrella. There is some rain expected"
+        puts "------------------------------------------------------------------------------"
       elsif weather.state == "Thunderstorm"
-        puts "Stay home if you can. There is a Thunderstorm in #{weather.city}"  
+        puts "Stay home if you can. There is a Thunderstorm in #{weather.city}" 
+        puts "------------------------------------------------------------------------------" 
       elsif weather.state == "Snow" || weather.state == "Sleet"
-        puts "Dont forget your boots. It will be snowing in #{weather.city}"
+        puts "Dont forget your boots and be careful driving. It will be snowing in #{weather.city}"
+        puts "------------------------------------------------------------------------------"
       else  
         puts "Watch your head! Its hailing in #{weather.city}"
+        puts "------------------------------------------------------------------------------"
       end  
     end  
     sleep(3)
@@ -75,7 +83,7 @@ class Cli
     else
       Api.new(new_city)  
       forecast_display(Weather.all.last)
-      sleep(3)
+      sleep(5)
       display_options
     end
   end  

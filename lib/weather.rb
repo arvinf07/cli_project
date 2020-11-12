@@ -14,8 +14,8 @@ class Weather
     save 
   end
 
-  def self.weather_exists?(city)
-    @@all.any? {|weather| weather.city.downcase == city }
+  def self.weather_exists?(city)  #Can I place two conditions inside an #any? block?
+    @@all.any? {|weather| weather.city.downcase == city.downcase} || @@all.any? {|weather| weather.city.downcase.include?(city.downcase)}
   end  
 
   def self.all
