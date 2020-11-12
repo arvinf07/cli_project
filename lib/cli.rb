@@ -19,6 +19,7 @@ class Cli
     puts "If the city you are looking for is not on the list\ntype 'new' to search for a new city."
     puts "When you are done type 'exit' to quit the program"
     puts "------------------------------------------------------------------------------\n\n"
+    print "=>"
     user_input = gets.strip
     if user_input.downcase == 'new' 
       add_city
@@ -32,7 +33,8 @@ class Cli
       forecast_display(Weather.all[user_input.to_i-1])
       sleep(5)
     else 
-      puts "\n\nThat is not a valid command. Try again bucko\n\n"  
+      puts "\n\nWait for Prompt(=>)"
+      puts "That is not a valid command. Try again bucko\n\n"  
       sleep(3)
       display_options
     end  
@@ -69,12 +71,13 @@ class Cli
         puts "------------------------------------------------------------------------------"
       end  
     end  
-    sleep(3)
+    sleep(5)
     display_options
   end  
 
   def self.add_city
     puts "What city would you like to add?(only CITIES are valid)"
+    print "=>"
     new_city = gets.strip.downcase
     if Weather.weather_exists?(new_city)
       puts "\nThat city is already on the list. Look...\n\n"
