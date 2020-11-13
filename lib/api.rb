@@ -1,6 +1,5 @@
-require 'pry'
 require_relative "../environment.rb"
-require_relative "./weather.rb"
+
 
 class Api
   
@@ -17,8 +16,8 @@ class Api
   def get_city_id
     url = "https://www.metaweather.com/api/location/search/?query=#{self.query}"
     uri = URI(url)
-    response = Net::HTTP.get(uri)
-    city = JSON.parse(response)
+    response = Net::HTTP.get(uri) #returns stringIO
+    city = JSON.parse(response) #Turns it into ruby hash
     if !city.any? || city[0]["title"].downcase != self.query.downcase
       Cli.invalid_city 
     else
@@ -50,9 +49,4 @@ class Api
 
 end  
 
-api = Api.new('new york')
-Api.new('london')
-Api.new('tokyo')
-Api.new('paris')
-Api.new('dubai')
-Api.new('singapore')
+

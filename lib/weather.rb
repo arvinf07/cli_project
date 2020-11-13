@@ -1,6 +1,5 @@
-require 'pry'
 require_relative "../environment.rb"
-require_relative "./api.rb"
+
 
 class Weather
   @@all = []
@@ -14,7 +13,7 @@ class Weather
     save 
   end
 
-  def self.weather_exists?(city)  #Can I place two conditions inside an #any? block?
+  def self.weather_exists?(city) 
     @@all.any? {|weather| weather.city.downcase == city.downcase} || @@all.any? {|weather| weather.city.downcase.include?(city.downcase)}
   end  
 

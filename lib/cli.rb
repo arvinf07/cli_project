@@ -1,12 +1,15 @@
-require 'pry'
 require_relative "../environment.rb"
-require_relative "./api.rb"
-require_relative "./weather.rb"
 
 
 class Cli
 
   def self.start
+    Api.new('new york')
+    Api.new('london')
+    Api.new('tokyo')
+    Api.new('paris')
+    Api.new('dubai')
+    Api.new('singapore')
     puts "\n\nWelcome to Weather Getter 2020!\n\n"
     display_options
   end
@@ -29,12 +32,12 @@ class Cli
     elsif user_input == 'list'
       sleep(3)
       display_options  
-    elsif user_input.to_i.between?(1, Weather.all.size)
+    elsif user_input.to_i.between?(1, Weather.all.size) 
       forecast_display(Weather.all[user_input.to_i-1])
       sleep(5)
     else 
-      puts "\n\nWait for Prompt(=>)"
-      puts "That is not a valid command. Try again bucko\n\n"  
+      puts "\n\nThat is not a valid command. Try again bucko"
+      puts "Wait for Prompt(=>)\n\n"  
       sleep(3)
       display_options
     end  
